@@ -5,6 +5,7 @@ import { useForm, Form } from '../components/UseForm';
 import Controls from "../components/controls/Controls";
 import { Grid } from '@material-ui/core'
 
+
 const useStyles = makeStyles(theme => ({
   root: {
     background: "#0d131d",
@@ -40,7 +41,6 @@ const initialFValues = {
   userName: '',
   password: '',
   email: '',
-  rpassword: '',
   userType: ''
 }
 
@@ -55,8 +55,6 @@ const RegisterPage = props => {
       temp.email = (/$^|.+@.+..+/).test(fieldValues.email) ? "" : "Email is not valid."
     if ('password' in fieldValues)
       temp.password = fieldValues.password.length >= 8 ? "" : "Password must have at least 8 characters."
-    if ('password' in fieldValues || 'rpassword' in fieldValues)
-      temp.rpassword = (fieldValues.password == fieldValues.rpassword) ? "" : "Repeat the same password ."
     setErrors({
       ...temp
     })
@@ -84,7 +82,6 @@ const RegisterPage = props => {
         var username = values.userName;
         var password = values.password;
         var email = values.email;
-        var rpassword = values.rpassword;
         var userType = values.userType;
 
         const config = {
@@ -92,7 +89,7 @@ const RegisterPage = props => {
                 'Content-Type': 'application/json',
             },
           }
-          axios.post('http://localhost:5000/api/auth/register', { username,password,email,rpassword,userType }, config)
+          axios.post('http://localhost:5000/api/auth/register', { username,password,email,userType }, config)
           .then(response => {
               console.log(response.data);
               alert('User registerd')
@@ -108,6 +105,7 @@ const RegisterPage = props => {
   }
 
   return (
+    
     <div className={classes.root}>
       <div className={classes.loginCard}>
         <Typography variant="h5" component="h1">

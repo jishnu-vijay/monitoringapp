@@ -18,18 +18,9 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(cors())
 
-app.use('/api/account', accountRoutes)
-
-app.use('/api/purchase', purchaseRoutes)
-
-app.use('/api/sale', saleRoutes)
-
-app.use('/api/user', userRoutes)
 
 app.use('/api/auth', authRoutes)
-
-app.use('/api/ledgers', ledgersRoutes)
-
+app.use('/api/url', authRoutes)
 
 
 app.get('/',(req, res)=>{

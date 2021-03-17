@@ -1,4 +1,3 @@
-import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -7,40 +6,25 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import axios from 'axios'
+import React, { useState, useEffect } from 'react'
 
 const useStyles = makeStyles((theme) => ({
-  icon: {
-    marginRight: theme.spacing(2),
-  },
-  heroContent: {
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(8, 0, 6),
-  },
-  heroButtons: {
-    marginTop: theme.spacing(4),
-  },
-  cardGrid: {
-    paddingTop: theme.spacing(8),
-    paddingBottom: theme.spacing(8),
-  },
-  card: {
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  cardMedia: {
-    paddingTop: '56.25%', // 16:9
-  },
-  cardContent: {
+  root: {
     flexGrow: 1,
   },
-  footer: {
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(6),
+  addButton: {
+    marginLeft: theme.spacing(2),
   },
+  title: {
+    flexGrow: 1,
+  },
+  myContent: {
+    backgroundColor: theme.palette.background.paper,
+    padding: theme.spacing(6, 0, 0),
+  }
 }));
 
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 const DashBoard = props => {
   const classes = useStyles();
@@ -48,19 +32,22 @@ const DashBoard = props => {
   return (
     <React.Fragment>
       <CssBaseline />
-      <AppBar position="relative">
+      <div className={classes.root}>
+      <AppBar position="static">
         <Toolbar>
-          <Typography variant="h6" color="inherit" noWrap>
-            DashBoard
+          <Typography variant="h6" className={classes.title}>
+            Dashboard
           </Typography>
+          <Button color="inherit">Logout</Button>
         </Toolbar>
       </AppBar>
+    </div>
       <main>
         {/* Hero unit */}
-        <div className={classes.heroContent}>
-          <Container maxWidth="sm">
-            
-          </Container>
+        <div className={classes.myContent}>
+          <Button className={classes.addButton} variant="outlined" color="primary" onClick={() => history.push("/addurl")}>
+            Add URL
+          </Button>
         </div>
         
       </main>

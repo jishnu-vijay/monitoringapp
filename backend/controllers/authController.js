@@ -1,10 +1,8 @@
 import asyncHandler from 'express-async-handler'
 import generateToken from '../utils/generateToken.js'
 import User from '../models/authModels.js'
-import  validationResult from "express-validator"
-
-
-
+import validator from 'express-validator'
+const { check, validationResult } = validator
 // @desc    Auth user & get token
 // @route   POST /api/auth/login
 // @access  Public
@@ -51,8 +49,6 @@ const registerUser = asyncHandler(async (req, res) => {
     const userName = req.body.username;
     const email = req.body.email;
     const password = req.body.password;
-    const rpassword = req.body.rpassword;
-    const userType = req.body.userType;
 
     const errors = validationResult(req);
 
@@ -75,8 +71,7 @@ const registerUser = asyncHandler(async (req, res) => {
       const user = await User.create({
         userName,
         email,
-        password,
-        userType
+        password
       })
 
       if (user) {
@@ -84,7 +79,6 @@ const registerUser = asyncHandler(async (req, res) => {
           _id: user._id,
           userName: user.userName,
           email: user.email,
-          userType: user.userType,
           token: generateToken(user._id),
         })
       } else {

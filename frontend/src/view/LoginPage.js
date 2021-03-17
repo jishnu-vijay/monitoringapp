@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from 'react';
 import axios from 'axios';
 import { makeStyles, Typography, Button } from "@material-ui/core";
 import { useForm, Form } from '../components/UseForm';
@@ -42,9 +42,9 @@ const LoginPage = props => {
   const validate = (fieldValues = values) => {
     let temp = { ...errors }
     if ('password' in fieldValues)
-      temp.password = fieldValues.password.length > 5 ? "" : "Username must be at least 5 chars long."
+      temp.password = fieldValues.password.length > 8 ? "" : "Username must be at least 8 chars long."
     if ('userName' in fieldValues)
-      temp.userName = fieldValues.userName.length > 8 ? "" : "password must be at least 8 chars long."
+      temp.userName = fieldValues.userName.length > 5 ? "" : "password must be at least 5 chars long."
     setErrors({
       ...temp
     })
@@ -82,12 +82,12 @@ const LoginPage = props => {
               console.log(response.data);
               alert('Login success')
               localStorage.setItem('userInfo', JSON.stringify(response.data))
-              history.push("/")               
+              history.push("/dashboard")               
         })
         .catch(function (error) {     
           console.log(error)  
           alert('Invalid username or password') 
-          history.push("/pages/auth/login")         
+          history.push("/login")         
       })
 
     }
@@ -132,15 +132,7 @@ const LoginPage = props => {
                 >
                   Login
                 </Button>
-                <Button
-                  variant="outlined"
-                  color="primary"
-                  fullWidth
-                  className={classes.button}
-                  onClick={() => history.push("/register")}
-                >
-                  Register Now!
-                </Button>
+                
               </div>
             </Grid>
           </Grid>
