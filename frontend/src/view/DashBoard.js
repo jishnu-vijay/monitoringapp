@@ -31,7 +31,7 @@ const DashBoard = props => {
   const classes = useStyles();
   const { history } = props;
   const [list, setList] = useState([]);
-  const [monitorCheck, setMonitor] = useState(0);
+  const [monitoredList, setmonitoredList] = useState([]);
   useEffect(() => {
 
     var loginUser = localStorage.getItem("userInfo");
@@ -51,7 +51,7 @@ const DashBoard = props => {
                 'Content-Type': 'application/json',
             },
         }
-        axios.get('http://localhost:5000/api/url/geturl', config)
+        axios.get('/api/url/geturl', config)
             .then(response => {
                 console.log(response.data);
                 setList(response.data)
@@ -60,19 +60,34 @@ const DashBoard = props => {
             console.log(error)
         }
 
+        const config = {
+          headers: {
+              'Content-Type': 'application/json',
+          },
+        }
+        axios.get('/api/url/getmonitorUrl', config)
+        .then(response => {
+            console.log(response.data);
+            setmonitoredList(response.data)
+        })
+
     }, []);
 
     useEffect(() => {
-      const interval = setInterval(() => {
-      axios.get('http://localhost:5000/api/url/monitor')
-      .then(response => {
-          setMonitor(1)
-          window.location.reload(); 
-      })
 
-      }, 5000);
+      const interval = setInterval(() => {
+      axios.get('/api/url/monitor')
+
+
+      
+      window.location.reload(); 
+
+      }, 300000);
       return () => clearInterval(interval);
+
     }, []);
+
+    //deletemurl
     function deleteHandle(uid)
     {
         var loginUser = localStorage.getItem("userInfo");
@@ -84,7 +99,7 @@ const DashBoard = props => {
           },
         }
   
-        axios.get(`http://localhost:5000/api/url/${uid}`,config)
+        axios.get(`/api/url/${uid}`,config)
         window.location.reload(); 
 
     }
@@ -125,9 +140,6 @@ const DashBoard = props => {
                   </TableCell>
                   <TableCell><b>Url</b></TableCell>
                   <TableCell><b>Response limit(ms)</b></TableCell>       
-                  {monitorCheck==1 ? (
-                  <TableCell><b>Moretime than limit</b></TableCell>
-                    ) : ""}                      
                 </TableRow>               
                 <TableBody>
                   {list.map(urldata => (
@@ -139,12 +151,27 @@ const DashBoard = props => {
                         </TableCell>
                           <TableCell >{urldata.url}</TableCell>
                           <TableCell >{urldata.responseTime}</TableCell>
-                          {monitorCheck==1 ? (<TableCell >{urldata.moreThan}</TableCell>): "" }
                       </TableRow>
                   ))}  
                 </TableBody>
               </Table>
-            </Grid>      
+            </Grid>  
+            <br></br><br></br>
+            <h3>Show urls more time than limit</h3>
+            <Grid item  xs={12} sm={12} md={8}>        
+              <Table>
+                <TableRow>
+                  <TableCell><b>Urls</b></TableCell>
+                </TableRow>               
+                <TableBody>
+                  {monitoredList.map(murldata => (
+                      <TableRow>
+                          <TableCell >{murldata.url}</TableCell>
+                      </TableRow>
+                  ))}  
+                </TableBody>
+              </Table>
+            </Grid>     
         </div>
         
       </main>

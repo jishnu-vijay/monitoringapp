@@ -84,7 +84,7 @@ const DashBoard = props => {
                     Authorization: `Bearer ${parsedloginuser.token}`,
                 },
             }
-            axios.post('http://localhost:5000/api/url/addurl', {url,responseTime,userId}, config)
+            axios.post('/api/url/addurl', {url,responseTime,userId}, config)
                 .then(response => {
                     console.log(response.data);
                     alert('Url added')

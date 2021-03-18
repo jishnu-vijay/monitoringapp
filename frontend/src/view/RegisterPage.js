@@ -89,7 +89,7 @@ const RegisterPage = props => {
                 'Content-Type': 'application/json',
             },
           }
-          axios.post('http://localhost:5000/api/auth/register', { username,password,email,userType }, config)
+          axios.post('/api/auth/register', { username,password,email,userType }, config)
           .then(response => {
               console.log(response.data);
               alert('User registerd')

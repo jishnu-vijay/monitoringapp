@@ -2,7 +2,7 @@
   "name": "monitoring",
   "version": "1.0.0",
   "description": "url monitoring application",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
@@ -17,6 +17,8 @@
     "express-validator": "^6.10.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.11.14",
+    "morgan": "^1.10.0",
+    "path": "^0.12.7",
     "request": "^2.88.2"
   },
   "type": "module"

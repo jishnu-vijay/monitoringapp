@@ -39,6 +39,20 @@ const geturl = asyncHandler(async (req, res) => {
     });   
 })
 
+// @desc    Auth add url 
+// @route   POST /api/url/getmonitorUrl
+const getmonitorUrl = asyncHandler(async (req, res) => {
+
+    urlModel.find({moreThan:true}, function(err, data) {
+        if (err) {
+        res.send(err);
+        } else {    
+            console.log(data)    
+            res.send(data);
+        }
+    });   
+})
+
 const monitorurls = asyncHandler(async (req, res) => {
 
     urlModel.find({}, function(err, data) {
@@ -95,5 +109,5 @@ const deleteUrl = asyncHandler(async (req, res) => {
 
 
 export {
-    addUrl,geturl,monitorurls,deleteUrl
+    addUrl,geturl,monitorurls,deleteUrl,getmonitorUrl
 }

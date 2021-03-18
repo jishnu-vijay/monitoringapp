@@ -77,7 +77,7 @@ const LoginPage = props => {
               'Content-Type': 'application/json',
           },
         }
-        axios.post('http://localhost:5000/api/auth/login', { username,password }, config)
+        axios.post('/api/auth/login', { username,password }, config)
         .then(response => {
               console.log(response.data);
               alert('Login success')
