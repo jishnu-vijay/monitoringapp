@@ -10,7 +10,11 @@ const urlSchema = mongoose.Schema(
     },
     userId: {
         type: String,
-      }
+      },
+    moreThan: {
+      type: Boolean,
+      default: false
+    }
   },
   {
     timestamps: true,

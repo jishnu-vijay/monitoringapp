@@ -67,6 +67,7 @@ const DashBoard = props => {
     } = useForm(initialFValues, true, validate);
 
     const handleSubmit = e => {
+      e.preventDefault();
         if (validate()) {
             console.log(values)
 
@@ -76,21 +77,24 @@ const DashBoard = props => {
             const loginUser = localStorage.getItem("userInfo");
             const parsedloginuser = JSON.parse(loginUser)
             const userId = parsedloginuser._id
-
+            console.log(userId)
             const config = {
                 headers: {
                     'Content-Type': 'application/json',
                     Authorization: `Bearer ${parsedloginuser.token}`,
                 },
             }
-            axios.post('http://localhost:5000/api/url/addurl', { 
-                url,responseTime,userId               
-                }, config)
+            axios.post('http://localhost:5000/api/url/addurl', {url,responseTime,userId}, config)
                 .then(response => {
                     console.log(response.data);
                     alert('Url added')
                     history.push('/dashboard')
                 })
+                .catch(function (error) {     
+                  console.log(error)  
+                  alert('Url not added')
+                  history.push("/addurl")         
+              })
         }
     }    
   return (

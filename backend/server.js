@@ -1,6 +1,7 @@
 import express from 'express'
 import dotenv from 'dotenv'
 import authRoutes from './routes/authRoutes.js'
+import urlRoutes from './routes/urlRoutes.js'
 import bodyParser from "body-parser";
 import connectDB from './config/db.js'
 import cors from 'cors'
@@ -20,7 +21,7 @@ app.use(cors())
 
 
 app.use('/api/auth', authRoutes)
-app.use('/api/url', authRoutes)
+app.use('/api/url', urlRoutes)
 
 
 app.get('/',(req, res)=>{

@@ -1,10 +1,12 @@
 import express from 'express'
 const router = express.Router();
-import { addUrl,geturl } from '../controllers/urlController.js'
+import { addUrl,geturl,monitorurls,deleteUrl } from '../controllers/urlController.js'
 import { isAuthenticated, isAdmin } from '../middleware/authMiddleware.js'
 
-router.route('/addurl').get(isAuthenticated,addUrl)
-router.route('/geturl').get(isAuthenticated,geturl)
+router.route('/addurl').post(isAuthenticated,addUrl)
+router.route('/geturl').get(geturl)
+router.route('/monitor').get(monitorurls)
+router.route('/:id').get(isAuthenticated,deleteUrl)
 
 
 export default router
