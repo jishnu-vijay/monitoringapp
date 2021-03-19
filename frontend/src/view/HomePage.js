@@ -75,7 +75,7 @@ const HomePage = props => {
             Availability monitoring App
             </Typography>
             <Typography variant="h5" align="center" color="textSecondary" paragraph>
-            Availability monitoring Application which monitors your configured URL and logs the details.
+            Availability monitoring Application which monitors your configured URL in every 5 minutes and logs the details.
             </Typography>
             <div className={classes.heroButtons}>
               <Grid container spacing={2} justify="center">

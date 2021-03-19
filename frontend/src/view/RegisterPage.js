@@ -50,7 +50,8 @@ const RegisterPage = props => {
 
   const validate = (fieldValues = values) => {
     let temp = { ...errors }
-    
+    if ('userName' in fieldValues)
+      temp.userName = fieldValues.userName.length >= 5 ? "" : "Username must have at least 5 characters."
     if ('email' in fieldValues)
       temp.email = (/$^|.+@.+..+/).test(fieldValues.email) ? "" : "Email is not valid."
     if ('password' in fieldValues)
